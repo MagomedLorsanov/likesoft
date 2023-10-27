@@ -1,0 +1,30 @@
+// To create Database
+
+CREATE DATABASE bills
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Russian_Russia.1251'
+    LC_CTYPE = 'Russian_Russia.1251'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+
+// To create the table
+
+
+CREATE TABLE IF NOT EXISTS public.bills_ru_events
+(
+    id integer NOT NULL DEFAULT nextval('bills_ru_events_id_seq'::regclass),
+    date timestamp without time zone NOT NULL,
+    title character varying(230) COLLATE pg_catalog."default" NOT NULL,
+    url character varying(240) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT bills_ru_events_pkey PRIMARY KEY (id),
+    CONSTRAINT bills_ru_events_url_key UNIQUE (url)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.bills_ru_events
+    OWNER to postgres;
